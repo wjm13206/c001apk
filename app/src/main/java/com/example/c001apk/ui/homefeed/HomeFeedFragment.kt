@@ -1,4 +1,4 @@
-﻿package com.example.c001apk.ui.homefeed
+package com.example.c001apk.ui.homefeed
 
 import android.annotation.SuppressLint
 import android.content.DialogInterface
@@ -87,7 +87,7 @@ class HomeFeedFragment : BaseAppFragment<HomeFeedViewModel>(), IOnTabClickListen
             when (viewModel.type) {
                 "rank" -> {
                     viewModel.dataListUrl = "/page?url=V9_HOME_TAB_RANKING"
-                    viewModel.dataListTitle = "鐑"
+                    viewModel.dataListTitle = "热榜"
                 }
 
                 "follow" -> {
@@ -95,22 +95,22 @@ class HomeFeedFragment : BaseAppFragment<HomeFeedViewModel>(), IOnTabClickListen
                         when (PrefManager.FOLLOWTYPE) {
                             "all" -> {
                                 viewModel.dataListUrl = "/page?url=V9_HOME_TAB_FOLLOW"
-                                viewModel.dataListTitle = "鍏ㄩ儴鍏虫敞"
+                                viewModel.dataListTitle = "全部关注"
                             }
 
                             "circle" -> {
                                 viewModel.dataListUrl = "/page?url=V9_HOME_TAB_FOLLOW&type=circle"
-                                viewModel.dataListTitle = "濂藉弸鍏虫敞"
+                                viewModel.dataListTitle = "好友关注"
                             }
 
                             "topic" -> {
                                 viewModel.dataListUrl = "/page?url=V9_HOME_TAB_FOLLOW&type=topic"
-                                viewModel.dataListTitle = "璇濋鍏虫敞"
+                                viewModel.dataListTitle = "话题关注"
                             }
 
                             else -> {
                                 viewModel.dataListUrl = "/page?url=V9_HOME_TAB_FOLLOW&type=product"
-                                viewModel.dataListTitle = "鏁扮爜鍏虫敞"
+                                viewModel.dataListTitle = "数码关注"
                             }
                         }
 
@@ -120,7 +120,7 @@ class HomeFeedFragment : BaseAppFragment<HomeFeedViewModel>(), IOnTabClickListen
 
                 "coolPic" -> {
                     viewModel.dataListUrl = "/page?url=V11_FIND_COOLPIC"
-                    viewModel.dataListTitle = "閰峰浘"
+                    viewModel.dataListTitle = "酷图"
                 }
             }
         }
@@ -152,7 +152,7 @@ class HomeFeedFragment : BaseAppFragment<HomeFeedViewModel>(), IOnTabClickListen
                     setView(binding.root)
                     setTitle("captcha")
                     setNegativeButton(android.R.string.cancel, null)
-                    setPositiveButton("楠岃瘉骞剁户缁?) { _, _ ->
+                    setPositiveButton("验证并继续") { _, _ ->
                         viewModel.requestValidateData = HashMap()
                         viewModel.requestValidateData["type"] = "err_request_captcha"
                         viewModel.requestValidateData["code"] = binding.captchaText.text.toString()
@@ -254,9 +254,9 @@ class HomeFeedFragment : BaseAppFragment<HomeFeedViewModel>(), IOnTabClickListen
                 refreshData()
             } else if (viewModel.type == "follow") {
                 MaterialAlertDialogBuilder(requireContext()).apply {
-                    setTitle("鍏虫敞鍒嗙粍")
+                    setTitle("关注分组")
                     val items =
-                        arrayOf("鍏ㄩ儴鍏虫敞", "濂藉弸鍏虫敞", "璇濋鍏虫敞", "鏁扮爜鍏虫敞", "搴旂敤鍏虫敞")
+                        arrayOf("全部关注", "好友关注", "话题关注", "数码关注", "应用关注")
                     viewModel.position = when (PrefManager.FOLLOWTYPE) {
                         "all" -> 0
                         "circle" -> 1
@@ -272,34 +272,34 @@ class HomeFeedFragment : BaseAppFragment<HomeFeedViewModel>(), IOnTabClickListen
                         when (position) {
                             0 -> {
                                 viewModel.dataListUrl = "/page?url=V9_HOME_TAB_FOLLOW"
-                                viewModel.dataListTitle = "鍏ㄩ儴鍏虫敞"
+                                viewModel.dataListTitle = "全部关注"
                                 PrefManager.FOLLOWTYPE = "all"
                             }
 
                             1 -> {
                                 viewModel.dataListUrl =
                                     "/page?url=V9_HOME_TAB_FOLLOW&type=circle"
-                                viewModel.dataListTitle = "濂藉弸鍏虫敞"
+                                viewModel.dataListTitle = "好友关注"
                                 PrefManager.FOLLOWTYPE = "circle"
                             }
 
                             2 -> {
                                 viewModel.dataListUrl =
                                     "/page?url=V9_HOME_TAB_FOLLOW&type=topic"
-                                viewModel.dataListTitle = "璇濋鍏虫敞"
+                                viewModel.dataListTitle = "话题关注"
                                 PrefManager.FOLLOWTYPE = "topic"
                             }
 
                             3 -> {
                                 viewModel.dataListUrl =
                                     "/page?url=V9_HOME_TAB_FOLLOW&type=product"
-                                viewModel.dataListTitle = "鏁扮爜鍏虫敞"
+                                viewModel.dataListTitle = "数码关注"
                                 PrefManager.FOLLOWTYPE = "product"
                             }
 
                             4 -> {
                                 viewModel.dataListUrl = "/page?url=V9_HOME_TAB_FOLLOW&type=apk"
-                                viewModel.dataListTitle = "搴旂敤鍏虫敞"
+                                viewModel.dataListTitle = "应用关注"
                                 PrefManager.FOLLOWTYPE = "apk"
                             }
                         }

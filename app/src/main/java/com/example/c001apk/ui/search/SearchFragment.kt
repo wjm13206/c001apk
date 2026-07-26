@@ -1,4 +1,4 @@
-﻿package com.example.c001apk.ui.search
+package com.example.c001apk.ui.search
 
 import android.content.Context
 import android.os.Bundle
@@ -118,7 +118,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), IOnItemClickListen
 
     private fun search() {
         if (binding.editText.text.toString() == "") {
-            Toast.makeText(requireContext(), "璇疯緭鍏ュ叧閿瘝", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "请输入关键词", Toast.LENGTH_SHORT).show()
         } else {
             requireActivity().supportFragmentManager
                 .beginTransaction()
@@ -166,8 +166,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), IOnItemClickListen
                 .showSoftInput(binding.editText, 0)
             imeOptions = EditorInfo.IME_ACTION_SEARCH
             inputType = EditorInfo.TYPE_CLASS_TEXT
-            hint = if (viewModel.pageType.isNotEmpty()) "鍦?${viewModel.title} 涓悳绱?
-            else "鎼滅储"
+            hint = if (viewModel.pageType.isNotEmpty()) "在 ${viewModel.title} 中搜索"
+            else "搜索"
 
             addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(

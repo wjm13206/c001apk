@@ -1,4 +1,4 @@
-﻿package com.example.c001apk.ui.feed
+package com.example.c001apk.ui.feed
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -73,16 +73,16 @@ class FeedReplyAdapter(
             blackListRepo: BlackListRepo
         ) {
 
-            if (!reply.username.contains("[妤间富]") && !reply.username.contains("[缃《]")) {
+            if (!reply.username.contains("[楼主]") && !reply.username.contains("[置顶]")) {
                 val unameTag =
                     when (reply.uid) {
-                        reply.feedUid -> " [妤间富]"
+                        reply.feedUid -> " [楼主]"
                         else -> ""
                     }
                 val replyTag =
                     when (haveTop && reply.id == topReplyId) {
                         true -> {
-                            if (bindingAdapterPosition == 0) " [缃《]"
+                            if (bindingAdapterPosition == 0) " [置顶]"
                             else ""
                         }
 
@@ -147,15 +147,15 @@ class FeedReplyAdapter(
 
                                 val replyTag1 =
                                     when (replyData.uid) {
-                                        reply.feedUid -> " [妤间富] "
-                                        reply.uid -> " [灞備富] "
+                                        reply.feedUid -> " [楼主] "
+                                        reply.uid -> " [层主] "
                                         else -> ""
                                     }
 
                                 val rReplyTag =
                                     when (replyData.ruid) {
-                                        reply.feedUid -> " [妤间富] "
-                                        reply.uid -> " [灞備富] "
+                                        reply.feedUid -> " [楼主] "
+                                        reply.uid -> " [层主] "
                                         else -> ""
                                     }
 
@@ -168,11 +168,11 @@ class FeedReplyAdapter(
                                 val replyPic =
                                     when (replyData.pic) {
                                         "" -> ""
-                                        else -> """ <a class=\"feed-forward-pic\" href=${replyData.pic}>鏌ョ湅鍥剧墖(${replyData.picArr?.size})</a>"""
+                                        else -> """ <a class=\"feed-forward-pic\" href=${replyData.pic}>查看图片(${replyData.picArr?.size})</a>"""
                                     }
 
                                 val mess =
-                                    """<a class="feed-link-uname" href="/u/${replyData.uid}">${replyData.username}${replyTag1}</a>鍥炲${rReplyUser}: ${replyData.message}${replyPic}"""
+                                    """<a class="feed-link-uname" href="/u/${replyData.uid}">${replyData.username}${replyTag1}</a>回复${rReplyUser}: ${replyData.message}${replyPic}"""
 
                                 textView.movementMethod = LinkMovementClickMethod.instance
 
@@ -220,7 +220,7 @@ class FeedReplyAdapter(
             if (reply.replyRowsMore != 0) {
                 binding.totalReply.isVisible = true
                 val count = (reply.replyRowsMore ?: 0) + (reply.replyRows?.size ?: 0)
-                binding.totalReply.text = "鏌ョ湅鏇村鍥炲($count)"
+                binding.totalReply.text = "查看更多回复($count)"
                 binding.totalReply.setOnClickListener {
                     listener.showTotalReply(
                         reply.id, reply.uid,

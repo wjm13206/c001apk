@@ -1,4 +1,4 @@
-﻿package com.example.c001apk.ui.feed.question
+package com.example.c001apk.ui.feed.question
 
 import android.content.res.Configuration
 import android.os.Bundle

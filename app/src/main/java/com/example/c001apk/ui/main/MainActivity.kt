@@ -1,4 +1,4 @@
-﻿package com.example.c001apk.ui.main
+package com.example.c001apk.ui.main
 
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
@@ -166,13 +166,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), IOnBottomClickContaine
 
     // from LibChecker
     /**
-     * 瑕嗙洊鎺?BottomNavigationView 鍐呴儴鐨?OnApplyWindowInsetsListener 骞堕伩鍏嶅叾琚蒋閿洏椤惰捣鏉?
+     * 覆盖掉 BottomNavigationView 内部的 OnApplyWindowInsetsListener 并避免其被软键盘顶起来
      * @see BottomNavigationView.applyWindowInsets
      */
     private fun fixBottomNavigationViewInsets(view: BottomNavigationView) {
         ViewCompat.setOnApplyWindowInsetsListener(view) { _, windowInsets ->
-            // 杩欓噷涓嶇洿鎺ヤ娇鐢?windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars())
-            // 鍥犱负瀹冪殑缁撴灉鍙兘鍙楀埌 insets 浼犳挱閾句笂灞傛煇鐜妭鐨勫奖鍝嶏紝鍑虹幇浜嗛敊璇殑 navigationBarsInsets
+            // 这里不直接使用 windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars())
+            // 因为它的结果可能受到 insets 传播链上层某环节的影响，出现了错误的 navigationBarsInsets
             val navigationBarsInsets =
                 ViewCompat.getRootWindowInsets(view)
                     ?.getInsets(WindowInsetsCompat.Type.systemBars())

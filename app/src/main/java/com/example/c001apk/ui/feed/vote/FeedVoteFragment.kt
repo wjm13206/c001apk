@@ -1,4 +1,4 @@
-﻿package com.example.c001apk.ui.feed.vote
+package com.example.c001apk.ui.feed.vote
 
 import android.os.Bundle
 import android.view.View

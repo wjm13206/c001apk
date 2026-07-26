@@ -98,7 +98,6 @@ object AppUtils {
         return packs
     }
 
-
     fun getTargetSdkVersion(context: Context, packageName: String): Int {
         return runCatching {
             context.packageManager.getPackageInfo(packageName, 0).applicationInfo?.targetSdkVersion ?: -1

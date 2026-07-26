@@ -1,4 +1,4 @@
-﻿package com.example.c001apk.ui.base
+package com.example.c001apk.ui.base
 
 import android.content.res.Configuration
 import android.os.Bundle

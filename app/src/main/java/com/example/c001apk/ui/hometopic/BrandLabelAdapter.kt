@@ -1,4 +1,4 @@
-﻿package com.example.c001apk.ui.hometopic
+package com.example.c001apk.ui.hometopic
 
 import android.graphics.Color
 import android.view.LayoutInflater

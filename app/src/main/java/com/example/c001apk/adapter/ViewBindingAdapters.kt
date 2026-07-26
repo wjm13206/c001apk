@@ -1,4 +1,4 @@
-﻿package com.example.c001apk.adapter
+package com.example.c001apk.adapter
 
 import android.annotation.SuppressLint
 import android.graphics.Color
@@ -60,7 +60,7 @@ fun setFollowText(textView: TextView, followAuthor: Int) {
         if (this) {
             when (followAuthor) {
                 0 -> {
-                    textView.text = "鍏虫敞"
+                    textView.text = "关注"
                     textView.setTextColor(
                         MaterialColors.getColor(
                             textView.context,
@@ -71,7 +71,7 @@ fun setFollowText(textView: TextView, followAuthor: Int) {
                 }
 
                 1 -> {
-                    textView.text = "鍙栨秷鍏虫敞"
+                    textView.text = "取消关注"
                     textView.setTextColor(textView.context.getColor(android.R.color.darker_gray))
                 }
 
@@ -260,10 +260,10 @@ fun setHotReply(hotReply: TextView, feed: HomeFeedResponse.Data?) {
             val mess =
                 if (feed.replyRows[0].picArr.isNullOrEmpty())
                     "<a class=\"feed-link-uname\" href=\"/u/${feed.replyRows[0].uid}\">${feed.replyRows[0].userInfo?.username}</a>: ${feed.replyRows[0].message}"
-                else if (feed.replyRows[0].message == "[鍥剧墖]")
-                    "<a class=\"feed-link-uname\" href=\"/u/${feed.replyRows[0].uid}\">${feed.replyRows[0].userInfo?.username}</a>: ${feed.replyRows[0].message} <a class=\"feed-forward-pic\" href=${feed.replyRows[0].pic}>鏌ョ湅鍥剧墖(${feed.replyRows[0].picArr?.size})</a>"
+                else if (feed.replyRows[0].message == "[图片]")
+                    "<a class=\"feed-link-uname\" href=\"/u/${feed.replyRows[0].uid}\">${feed.replyRows[0].userInfo?.username}</a>: ${feed.replyRows[0].message} <a class=\"feed-forward-pic\" href=${feed.replyRows[0].pic}>查看图片(${feed.replyRows[0].picArr?.size})</a>"
                 else
-                    "<a class=\"feed-link-uname\" href=\"/u/${feed.replyRows[0].uid}\">${feed.replyRows[0].userInfo?.username}</a>: ${feed.replyRows[0].message} [鍥剧墖] <a class=\"feed-forward-pic\" href=${feed.replyRows[0].pic}>鏌ョ湅鍥剧墖(${feed.replyRows[0].picArr?.size})</a>"
+                    "<a class=\"feed-link-uname\" href=\"/u/${feed.replyRows[0].uid}\">${feed.replyRows[0].userInfo?.username}</a>: ${feed.replyRows[0].message} [图片] <a class=\"feed-forward-pic\" href=${feed.replyRows[0].pic}>查看图片(${feed.replyRows[0].picArr?.size})</a>"
             hotReply.movementMethod = LinkMovementMethod.getInstance()
             hotReply.text = SpannableStringBuilderUtil.setText(
                 hotReply.context,
