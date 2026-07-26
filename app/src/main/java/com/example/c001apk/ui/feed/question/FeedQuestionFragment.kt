@@ -1,4 +1,4 @@
-package com.example.c001apk.ui.feed.question
+﻿package com.example.c001apk.ui.feed.question
 
 import android.content.res.Configuration
 import android.os.Bundle
@@ -100,7 +100,7 @@ class FeedQuestionFragment : BaseFragment<FragmentFeedVoteBinding>() {
             setColorSchemeColors(
                 MaterialColors.getColor(
                     requireContext(),
-                    com.google.android.material.R.attr.colorPrimary,
+                    android.R.attr.colorPrimary,
                     0
                 )
             )

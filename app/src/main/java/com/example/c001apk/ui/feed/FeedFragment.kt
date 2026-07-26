@@ -1,4 +1,4 @@
-package com.example.c001apk.ui.feed
+﻿package com.example.c001apk.ui.feed
 
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
@@ -97,7 +97,7 @@ class FeedFragment : BaseFragment<FragmentFeedBinding>(), IOnPublishClickListene
             setColorSchemeColors(
                 MaterialColors.getColor(
                     requireContext(),
-                    com.google.android.material.R.attr.colorPrimary,
+                    android.R.attr.colorPrimary,
                     0
                 )
             )
@@ -261,7 +261,7 @@ class FeedFragment : BaseFragment<FragmentFeedBinding>(), IOnPublishClickListene
                 binding.captchaText.highlightColor = ColorUtils.setAlphaComponent(
                     MaterialColors.getColor(
                         requireContext(),
-                        com.google.android.material.R.attr.colorPrimaryDark,
+                        android.R.attr.colorPrimaryDark,
                         0
                     ), 128
                 )
@@ -269,7 +269,7 @@ class FeedFragment : BaseFragment<FragmentFeedBinding>(), IOnPublishClickListene
                     setView(binding.root)
                     setTitle("captcha")
                     setNegativeButton(android.R.string.cancel, null)
-                    setPositiveButton("验证并继续") { _, _ ->
+                    setPositiveButton("楠岃瘉骞剁户缁?) { _, _ ->
                         viewModel.requestValidateData = HashMap()
                         viewModel.requestValidateData["type"] = "err_request_captcha"
                         viewModel.requestValidateData["code"] = binding.captchaText.text.toString()
@@ -353,7 +353,7 @@ class FeedFragment : BaseFragment<FragmentFeedBinding>(), IOnPublishClickListene
         }
         footerAdapter = FooterAdapter(ReloadListener())
 
-        binding.replyCount.text = "共 ${viewModel.replyCount} 回复"
+        binding.replyCount.text = "鍏?${viewModel.replyCount} 鍥炲"
         setListType()
 
         binding.recyclerView.apply {
@@ -424,8 +424,8 @@ class FeedFragment : BaseFragment<FragmentFeedBinding>(), IOnPublishClickListene
             val favorite = menu.findItem(R.id.favorite)
             lifecycleScope.launch(Dispatchers.Main) {
                 val isFavorite = viewModel.isFavorite(viewModel.id)
-                favorite.title = if (isFavorite) "取消收藏"
-                else "收藏"
+                favorite.title = if (isFavorite) "鍙栨秷鏀惰棌"
+                else "鏀惰棌"
             }
             setOnMenuItemClickListener {
                 when (it.itemId) {
@@ -446,7 +446,7 @@ class FeedFragment : BaseFragment<FragmentFeedBinding>(), IOnPublishClickListene
 
                     R.id.block -> {
                         MaterialAlertDialogBuilder(requireContext()).apply {
-                            setTitle("确定将 ${viewModel.funame} 加入黑名单？")
+                            setTitle("纭畾灏?${viewModel.funame} 鍔犲叆榛戝悕鍗曪紵")
                             setNegativeButton(android.R.string.cancel, null)
                             setPositiveButton(android.R.string.ok) { _, _ ->
                                 viewModel.saveUid(viewModel.uid.toString())
@@ -481,11 +481,11 @@ class FeedFragment : BaseFragment<FragmentFeedBinding>(), IOnPublishClickListene
 
                     R.id.favorite -> {
                         lifecycleScope.launch(Dispatchers.Main) {
-                            val isFavorite = favorite.title == "取消收藏"
+                            val isFavorite = favorite.title == "鍙栨秷鏀惰棌"
                             if (isFavorite) {
                                 viewModel.delete(viewModel.id)
-                                favorite.title = "收藏"
-                                ToastUtil.toast(requireContext(), "已取消收藏")
+                                favorite.title = "鏀惰棌"
+                                ToastUtil.toast(requireContext(), "宸插彇娑堟敹钘?)
                             } else {
                                 try {
                                     val fav = FeedEntity(
@@ -501,16 +501,16 @@ class FeedFragment : BaseFragment<FragmentFeedBinding>(), IOnPublishClickListene
                                                 if (this.length > 150) this.substring(0, 150)
                                                 else this
                                             }
-                                        }, // 还未加载完会空指针
+                                        }, // 杩樻湭鍔犺浇瀹屼細绌烘寚閽?
                                         if (!viewModel.articleList.isNullOrEmpty()) viewModel.articleDateLine.toString()
                                         else viewModel.feedDataList?.getOrNull(0)?.dateline.toString()
                                     )
                                     viewModel.insert(fav)
-                                    favorite.title = "取消收藏"
-                                    ToastUtil.toast(requireContext(), "已收藏")
+                                    favorite.title = "鍙栨秷鏀惰棌"
+                                    ToastUtil.toast(requireContext(), "宸叉敹钘?)
                                 } catch (e: Exception) {
                                     e.printStackTrace()
-                                    ToastUtil.toast(requireContext(), "请稍后再试")
+                                    ToastUtil.toast(requireContext(), "璇风◢鍚庡啀璇?)
                                 }
                             }
                         }

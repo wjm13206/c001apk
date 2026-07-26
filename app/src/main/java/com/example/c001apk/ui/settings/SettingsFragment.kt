@@ -1,4 +1,4 @@
-package com.example.c001apk.ui.settings
+﻿package com.example.c001apk.ui.settings
 
 import android.app.Dialog
 import android.content.ActivityNotFoundException
@@ -42,7 +42,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
                             )
                         )
                     } catch (e: ActivityNotFoundException) {
-                        Toast.makeText(requireContext(), "打开失败", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "鎵撳紑澶辫触", Toast.LENGTH_SHORT).show()
                     }
                 }
 
@@ -62,7 +62,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
             binding.designAboutInfo.highlightColor = ColorUtils.setAlphaComponent(
                 MaterialColors.getColor(
                     requireContext(),
-                    com.google.android.material.R.attr.colorPrimaryDark,
+                    android.R.attr.colorPrimaryDark,
                     0
                 ), 128
             )

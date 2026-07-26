@@ -1,4 +1,4 @@
-package com.example.c001apk.ui.feed.reply
+﻿package com.example.c001apk.ui.feed.reply
 
 import android.annotation.SuppressLint
 import android.app.Dialog
@@ -148,7 +148,7 @@ class Reply2ReplyBottomSheetDialog : BottomSheetDialogFragment(), IOnPublishClic
                 binding.captchaText.highlightColor = ColorUtils.setAlphaComponent(
                     MaterialColors.getColor(
                         requireContext(),
-                        com.google.android.material.R.attr.colorPrimaryDark,
+                        android.R.attr.colorPrimaryDark,
                         0
                     ), 128
                 )
@@ -156,7 +156,7 @@ class Reply2ReplyBottomSheetDialog : BottomSheetDialogFragment(), IOnPublishClic
                     setView(binding.root)
                     setTitle("captcha")
                     setNegativeButton(android.R.string.cancel, null)
-                    setPositiveButton("验证并继续") { _, _ ->
+                    setPositiveButton("楠岃瘉骞剁户缁?) { _, _ ->
                         viewModel.requestValidateData = HashMap()
                         viewModel.requestValidateData["type"] = "err_request_captcha"
                         viewModel.requestValidateData["code"] = binding.captchaText.text.toString()

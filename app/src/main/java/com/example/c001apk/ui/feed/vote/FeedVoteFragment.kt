@@ -1,4 +1,4 @@
-package com.example.c001apk.ui.feed.vote
+﻿package com.example.c001apk.ui.feed.vote
 
 import android.os.Bundle
 import android.view.View
@@ -94,7 +94,7 @@ class FeedVoteFragment : BaseFragment<FragmentFeedVoteBinding>() {
             setColorSchemeColors(
                 MaterialColors.getColor(
                     requireContext(),
-                    com.google.android.material.R.attr.colorPrimary,
+                    android.R.attr.colorPrimary,
                     0
                 )
             )

@@ -1,4 +1,4 @@
-package com.example.c001apk.ui.message
+﻿package com.example.c001apk.ui.message
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
@@ -204,7 +204,7 @@ class MessageFragment : BaseFragment<FragmentMessageBinding>() {
             setColorSchemeColors(
                 MaterialColors.getColor(
                     requireContext(),
-                    com.google.android.material.R.attr.colorPrimary,
+                    android.R.attr.colorPrimary,
                     0
                 )
             )
@@ -327,7 +327,7 @@ class MessageFragment : BaseFragment<FragmentMessageBinding>() {
 
         override fun onMessLongClicked(uname: String, id: String, position: Int): Boolean {
             MaterialAlertDialogBuilder(requireContext()).apply {
-                setTitle("删除来自 $uname 的通知？")
+                setTitle("鍒犻櫎鏉ヨ嚜 $uname 鐨勯€氱煡锛?)
                 setNegativeButton(android.R.string.cancel, null)
                 setPositiveButton(android.R.string.ok) { _, _ ->
                     viewModel.onPostDelete(position, id)

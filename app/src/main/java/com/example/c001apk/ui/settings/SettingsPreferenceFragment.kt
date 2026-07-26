@@ -1,4 +1,4 @@
-package com.example.c001apk.ui.settings
+﻿package com.example.c001apk.ui.settings
 
 import android.annotation.SuppressLint
 import android.content.DialogInterface
@@ -176,7 +176,7 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat() {
             editText.highlightColor = ColorUtils.setAlphaComponent(
                 MaterialColors.getColor(
                     requireContext(),
-                    com.google.android.material.R.attr.colorPrimaryDark,
+                    android.R.attr.colorPrimaryDark,
                     0
                 ), 128
             )
@@ -228,16 +228,16 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat() {
                 }
             }
             slider.addOnChangeListener { _, value, _ ->
-                fontScale.text = "字体大小: ${String.format("%.2f", value)}"
+                fontScale.text = "瀛椾綋澶у皬: ${String.format("%.2f", value)}"
                 fontScale.textSize = 16f * value
             }
-            fontScale.text = "字体大小: ${PrefManager.FONTSCALE}"
+            fontScale.text = "瀛椾綋澶у皬: ${PrefManager.FONTSCALE}"
             fontScale.textSize = 16f * PrefManager.FONTSCALE.toFloat()
             MaterialAlertDialogBuilder(requireContext()).apply {
                 setView(view)
                 setTitle(R.string.font_scale)
                 setNegativeButton(android.R.string.cancel, null)
-                setNeutralButton("重置") { _, _ ->
+                setNeutralButton("閲嶇疆") { _, _ ->
                     PrefManager.FONTSCALE = "1.00"
                     ActivityCollector.recreateActivity(MainActivity::class.java.name)
                 }
@@ -257,12 +257,12 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat() {
                 val currentSize = CacheDataManager.getTotalCacheSize(requireContext())
                 summary = currentSize
                 MaterialAlertDialogBuilder(requireContext()).apply {
-                    setTitle("确定清除缓存吗？")
-                    setMessage("当前缓存$currentSize")
+                    setTitle("纭畾娓呴櫎缂撳瓨鍚楋紵")
+                    setMessage("褰撳墠缂撳瓨$currentSize")
                     setNegativeButton(android.R.string.cancel, null)
                     setPositiveButton(android.R.string.ok) { _, _ ->
                         CacheDataManager.clearAllCache(requireContext())
-                        summary = "刚刚清理"
+                        summary = "鍒氬垰娓呯悊"
                     }
                     show()
                 }
@@ -272,8 +272,8 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat() {
 
         findPreference<Preference>("imageQuality")?.setOnPreferenceClickListener {
             MaterialAlertDialogBuilder(requireContext()).apply {
-                setTitle("图片画质")
-                val items = arrayOf("网络自适应", "原图", "普清", "wsrv.nl图片代理")
+                setTitle("鍥剧墖鐢昏川")
+                val items = arrayOf("缃戠粶鑷€傚簲", "鍘熷浘", "鏅竻", "wsrv.nl鍥剧墖浠ｇ悊")
                 val index = when (PrefManager.imageQuality) {
                     "auto" -> 0
                     "origin" -> 1

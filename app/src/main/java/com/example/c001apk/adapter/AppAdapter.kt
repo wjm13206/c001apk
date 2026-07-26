@@ -1,4 +1,4 @@
-package com.example.c001apk.adapter
+﻿package com.example.c001apk.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -260,33 +260,33 @@ class AppAdapter(
             if (data.userInfo != null && data.fUserInfo != null) {
                 binding.uid = data.userInfo.uid
                 binding.uname.text = data.userInfo.username
-                binding.follow.text = "${data.userInfo.follow}关注"
-                binding.fans.text = "${data.userInfo.fans}粉丝"
-                binding.act.text = DateUtils.fromToday(data.userInfo.logintime) + "活跃"
+                binding.follow.text = "${data.userInfo.follow}鍏虫敞"
+                binding.fans.text = "${data.userInfo.fans}绮変笣"
+                binding.act.text = DateUtils.fromToday(data.userInfo.logintime) + "娲昏穬"
                 ImageUtil.showIMG(binding.avatar, data.userInfo.userAvatar)
             } else if (data.userInfo == null && data.fUserInfo != null) {
                 binding.uid = data.fUserInfo.uid
                 binding.uname.text = data.fUserInfo.username
-                binding.follow.text = "${data.fUserInfo.follow}关注"
-                binding.fans.text = "${data.fUserInfo.fans}粉丝"
-                binding.act.text = DateUtils.fromToday(data.fUserInfo.logintime) + "活跃"
+                binding.follow.text = "${data.fUserInfo.follow}鍏虫敞"
+                binding.fans.text = "${data.fUserInfo.fans}绮変笣"
+                binding.act.text = DateUtils.fromToday(data.fUserInfo.logintime) + "娲昏穬"
                 ImageUtil.showIMG(binding.avatar, data.fUserInfo.userAvatar)
             } else if (data.userInfo != null) {
                 binding.uid = data.uid
                 binding.uname.text = data.username
-                binding.follow.text = "${data.follow}关注"
-                binding.fans.text = "${data.fans}粉丝"
-                binding.act.text = DateUtils.fromToday(data.logintime ?: 0L) + "活跃"
+                binding.follow.text = "${data.follow}鍏虫敞"
+                binding.fans.text = "${data.fans}绮変笣"
+                binding.act.text = DateUtils.fromToday(data.logintime ?: 0L) + "娲昏穬"
                 binding.isFollow = data.isFollow ?: 0
                 if (data.isFollow == 1) {
-                    binding.followBtn.text = "已关注"
+                    binding.followBtn.text = "宸插叧娉?
                     binding.followBtn.setTextColor(itemView.context.getColor(android.R.color.darker_gray))
                 } else {
-                    binding.followBtn.text = "关注"
+                    binding.followBtn.text = "鍏虫敞"
                     binding.followBtn.setTextColor(
                         MaterialColors.getColor(
                             itemView.context,
-                            com.google.android.material.R.attr.colorPrimary,
+                            android.R.attr.colorPrimary,
                             0
                         )
                     )
@@ -316,9 +316,9 @@ class AppAdapter(
             }
             binding.commentNum.text =
                 if (data.entityType == "topic")
-                    "${data.commentnumTxt}讨论"
+                    "${data.commentnumTxt}璁ㄨ"
                 else
-                    "${data.feedCommentNumTxt}讨论"
+                    "${data.feedCommentNumTxt}璁ㄨ"
 
             binding.setVariable(BR.data, data)
             binding.setVariable(BR.listener, listener)
@@ -354,9 +354,9 @@ class AppAdapter(
             binding.setVariable(BR.listener, listener)
             binding.fans.text =
                 if (data.targetType == "user")
-                    "${data.fansNum}粉丝"
+                    "${data.fansNum}绮変笣"
                 else
-                    "${data.commentNum}讨论"
+                    "${data.commentNum}璁ㄨ"
         }
     }
 
@@ -575,18 +575,18 @@ class AppAdapter(
                     is UserViewHolder -> {
                         holder.binding.isFollow = currentList[position].isFollow ?: 0
                         if (currentList[position].isFollow == 1) {
-                            holder.binding.followBtn.text = "已关注"
+                            holder.binding.followBtn.text = "宸插叧娉?
                             holder.binding.followBtn.setTextColor(
                                 holder.itemView.context.getColor(
                                     android.R.color.darker_gray
                                 )
                             )
                         } else {
-                            holder.binding.followBtn.text = "关注"
+                            holder.binding.followBtn.text = "鍏虫敞"
                             holder.binding.followBtn.setTextColor(
                                 MaterialColors.getColor(
                                     holder.itemView.context,
-                                    com.google.android.material.R.attr.colorPrimary,
+                                    android.R.attr.colorPrimary,
                                     0
                                 )
                             )

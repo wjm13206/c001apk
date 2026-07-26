@@ -1,4 +1,4 @@
-package com.example.c001apk.ui.blacklist
+﻿package com.example.c001apk.ui.blacklist
 
 import android.content.Context
 import android.os.Bundle
@@ -96,7 +96,7 @@ class BlackListActivity : BaseActivity<ActivityBlackListBinding>(), IOnItemClick
                                 else "topic_blacklist.json"
                             )
                         else
-                            Toast.makeText(this@BlackListActivity, "导出失败", Toast.LENGTH_SHORT)
+                            Toast.makeText(this@BlackListActivity, "瀵煎嚭澶辫触", Toast.LENGTH_SHORT)
                                 .show()
                     }
 
@@ -138,7 +138,7 @@ class BlackListActivity : BaseActivity<ActivityBlackListBinding>(), IOnItemClick
             try {
                 File("${this.cacheDir}/blacklist.json").inputStream().use { input ->
                     this.contentResolver.openOutputStream(uri).use { output ->
-                        if (output == null) Toast.makeText(this, "导出失败", Toast.LENGTH_SHORT)
+                        if (output == null) Toast.makeText(this, "瀵煎嚭澶辫触", Toast.LENGTH_SHORT)
                             .show()
                         else input.copyTo(output)
                     }
@@ -174,7 +174,7 @@ class BlackListActivity : BaseActivity<ActivityBlackListBinding>(), IOnItemClick
                     })
             }.onFailure {
                 MaterialAlertDialogBuilder(this)
-                    .setTitle("导入失败")
+                    .setTitle("瀵煎叆澶辫触")
                     .setMessage(it.message)
                     .setPositiveButton(android.R.string.ok, null)
                     .setNegativeButton("Crash Log") { _, _ ->
@@ -192,7 +192,7 @@ class BlackListActivity : BaseActivity<ActivityBlackListBinding>(), IOnItemClick
     private fun initClearHistory() {
         binding.clearAll.setOnClickListener {
             MaterialAlertDialogBuilder(this).apply {
-                setTitle("确定清除全部黑名单？")
+                setTitle("纭畾娓呴櫎鍏ㄩ儴榛戝悕鍗曪紵")
                 setNegativeButton(android.R.string.cancel, null)
                 setPositiveButton(android.R.string.ok) { _, _ ->
                     viewModel.deleteAll()
@@ -226,13 +226,13 @@ class BlackListActivity : BaseActivity<ActivityBlackListBinding>(), IOnItemClick
         binding.editText.highlightColor = ColorUtils.setAlphaComponent(
             MaterialColors.getColor(
                 this,
-                com.google.android.material.R.attr.colorPrimaryDark,
+                android.R.attr.colorPrimaryDark,
                 0
             ), 128
         )
         binding.editText.hint = when (viewModel.type) {
             "user" -> "uid"
-            "topic" -> "话题"
+            "topic" -> "璇濋"
             else -> ""
         }
         binding.editText.isFocusable = true

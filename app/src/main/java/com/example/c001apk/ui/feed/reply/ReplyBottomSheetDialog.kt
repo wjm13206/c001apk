@@ -1,4 +1,4 @@
-package com.example.c001apk.ui.feed.reply
+﻿package com.example.c001apk.ui.feed.reply
 
 import android.content.Context
 import android.os.Bundle
@@ -50,7 +50,7 @@ class ReplyBottomSheetDialog(mContext: Context, mView: View) : BottomSheetDialog
     var editText: ExtendEditText = view.findViewById(R.id.editText)
 
     fun setData() {
-        editText.hint = "回复: $uname"
+        editText.hint = "鍥炲: $uname"
         if (replyTextMap[rid + ruid].isNullOrEmpty())
             editText.text = null
         else {
@@ -70,7 +70,7 @@ class ReplyBottomSheetDialog(mContext: Context, mView: View) : BottomSheetDialog
         editText.highlightColor = ColorUtils.setAlphaComponent(
             MaterialColors.getColor(
                 context,
-                com.google.android.material.R.attr.colorPrimaryDark,
+                android.R.attr.colorPrimaryDark,
                 0
             ), 128
         )
@@ -82,10 +82,10 @@ class ReplyBottomSheetDialog(mContext: Context, mView: View) : BottomSheetDialog
         val forwardLayout: LinearLayout = view.findViewById(R.id.forwardLayout)
         val checkBox: CheckBox = view.findViewById(R.id.checkBox)
         if (type == "publish") {
-            title.text = "发动态"
+            title.text = "鍙戝姩鎬?
             forwardLayout.isVisible = false
         } else if (type == "reply") {
-            title.text = "回复"
+            title.text = "鍥炲"
         }
         val itemBeans = Emoji.initEmoji()
         val scrollAdapter = HorizontalScrollAdapter(context, itemBeans)
@@ -102,7 +102,7 @@ class ReplyBottomSheetDialog(mContext: Context, mView: View) : BottomSheetDialog
                 publish.setTextColor(
                     MaterialColors.getColor(
                         context,
-                        com.google.android.material.R.attr.colorPrimary,
+                        android.R.attr.colorPrimary,
                         0
                     )
                 )
@@ -253,7 +253,7 @@ class ReplyBottomSheetDialog(mContext: Context, mView: View) : BottomSheetDialog
                         } else {
                             editText.editableText.delete(tempStr.length - 1, selectionStart)
                         }
-                    } else { //括选
+                    } else { //鎷€?
                         editText.editableText.delete(selectionStart, selectionEnd)
                     }
                 }
