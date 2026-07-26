@@ -118,11 +118,9 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create or update beta tag
-        uses: richardsimko/update-tag@main
-        with:
-          tag_name: beta
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git tag -f beta
+          git push -f origin beta
 
       - name: Publish Pre-Release
         uses: ncipollo/release-action@main
