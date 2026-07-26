@@ -3,20 +3,12 @@ package com.example.c001apk.util
 import android.app.DownloadManager
 import android.content.Context
 import android.content.pm.ApplicationInfo
-import android.content.res.Configuration
 import android.net.Uri
 import android.os.Environment
-import androidx.core.text.HtmlCompat
 import com.example.c001apk.MyApplication
 import java.io.BufferedReader
-import java.io.FileInputStream
 import java.io.InputStreamReader
 import java.security.MessageDigest
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Date
-import java.util.Locale
-import java.util.UUID
 import kotlin.random.Random
 
 
@@ -33,49 +25,6 @@ object Utils {
             .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, name)
         downloadManager.enqueue(request)
         ClipboardUtil.copyText(context, url, false)
-    }
-
-    /**
-     * 检测设备宽度是否大于等于800dp
-     *
-     * @receiver Configuration
-     * @return boolean
-     */
-    fun Configuration.isTable() = this.screenWidthDp >= 800
-
-    /**
-     * 二进制数组转十六进制字符串
-     *
-     * @receiver byte array to be converted
-     * @return string containing hex values
-     */
-    fun ByteArray.byteArrayToHexString(): String {
-        val sb = StringBuilder(size * 2)
-        for (element in this) {
-            val v = element.toInt() and 0xff
-            if (v < 16) {
-                sb.append('0')
-            }
-            sb.append(Integer.toHexString(v))
-        }
-        return sb.toString().uppercase(Locale.US)
-    }
-
-    /**
-     * 十六进制字符串转二进制数组
-     *
-     * @receiver string of hex-encoded values
-     * @return decoded byte array
-     */
-    fun String.hexStringToByteArray(): ByteArray {
-        val data = ByteArray(length / 2)
-        for (index in indices step 2) {
-            data[index / 2] = (
-                    (Character.digit(this[index], 16) shl 4) +
-                            Character.digit(this[index + 1], 16)
-                    ).toByte()
-        }
-        return data
     }
 
     /**
@@ -137,28 +86,6 @@ object Utils {
 //            return ""
     }
 
-    fun FileInputStream.calculateMd5(): String {
-        val md = MessageDigest.getInstance("MD5")
-        val buffer = ByteArray(1024)
-        var length: Int
-        while (read(buffer, 0, 1024).also { length = it } != -1) {
-            md.update(buffer, 0, length)
-        }
-        close()
-
-        val md5Bytes = md.digest()
-        var i: Int
-        val buf = StringBuffer("")
-        for (offset in md5Bytes.indices) {
-            i = md5Bytes[offset].toInt()
-            if (i < 0) i += 256
-            if (i < 16) buf.append("0")
-            buf.append(Integer.toHexString(i))
-        }
-        //32位加密
-        return buf.toString()
-    }
-
     fun generateRandomMD5(): String {
         val hexChars = "0123456789abcdef"
         val stringBuilder = StringBuilder(32)
@@ -192,26 +119,6 @@ object Utils {
         }
 
         return sb.toString().uppercase()
-    }
-
-    /**
-     * 随机生成oaid 32位字符串
-     *
-     * @return oaid
-     */
-    fun randomOaid(): String {
-        val oaidLength = 32
-        val sb = StringBuilder(oaidLength)
-        for (i in 0 until oaidLength) {
-            val randomChar = (Random.nextInt(26) + 'a'.code).toChar()
-            sb.append(randomChar)
-        }
-        return sb.toString()
-    }
-
-
-    fun randomAndroidId(): String {
-        return UUID.randomUUID().toString().replace("-", "")
     }
 
     fun randomManufacturer(): String {
@@ -311,72 +218,4 @@ object Utils {
         return androidVersionRelease[Random.nextInt(androidVersionRelease.size)]
     }
 
-    /**
-     * 拓展Modifier无点击效果点击方法
-     *
-     * @receiver Modifier
-     * @return Modifier
-     */
-    /*fun Modifier.clickableNoRipple(onClick: () -> Unit) = composed {
-        clickable(
-            indication = null,
-            interactionSource = remember { MutableInteractionSource() }
-        ) {
-            onClick()
-        }
-    }*/
-
-    /**
-     * 格式化时间戳
-     *
-     * @receiver 时间戳
-     * @return 格式化的时间
-     */
-    fun Long.secondToDateString(pattern: String = "yyyy-MM-dd HH:mm:ss") =
-        SimpleDateFormat(pattern, Locale.CHINA).format(Date(this))
-
-    /**
-     * 计算时间差
-     *
-     * @receiver old timestamp
-     * @param currentTime current timestamp
-     */
-    fun Long.timeStampInterval(currentTime: Long): String {
-        val calendarOld = Calendar.getInstance()
-        val calendarNow = Calendar.getInstance()
-
-        val dateOld = Date(this)
-        val dateNow = Date(currentTime)
-
-        calendarOld.time = dateOld
-        calendarNow.time = dateNow
-
-        val dayOld = calendarOld.get(Calendar.DAY_OF_YEAR)
-        val dayNow = calendarNow.get(Calendar.DAY_OF_YEAR)
-
-        val hourOld = calendarOld.get(Calendar.HOUR_OF_DAY)
-        val hourNow = calendarNow.get(Calendar.HOUR_OF_DAY)
-
-        val minuteOld = calendarOld.get(Calendar.MINUTE)
-        val minuteNow = calendarNow.get(Calendar.MINUTE)
-
-        return if (dayOld == dayNow) {
-            if (hourOld == hourNow) {
-                "${minuteNow - minuteOld}分钟前"
-            } else {
-                "${hourNow - hourOld}小时前"
-            }
-        } else {
-            "${dayNow - dayOld}天前"
-        }
-    }
-
-    /**
-     * 格式化富文本
-     *
-     * @receiver 原始文本
-     * @return 格式化后文本
-     */
-    fun String.richToString(htmlCompat: Int = HtmlCompat.FROM_HTML_MODE_LEGACY) =
-        HtmlCompat.fromHtml(this, htmlCompat).toString()
 }
