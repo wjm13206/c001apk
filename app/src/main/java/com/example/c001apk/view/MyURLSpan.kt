@@ -48,7 +48,7 @@ class MyURLSpan(
         if (isColor)
             ds.color = MaterialColors.getColor(
                 mContext,
-                com.google.android.material.R.attr.colorControlNormal,
+                android.R.attr.colorControlNormal,
                 0
             ) //设置文本颜色
         ds.isUnderlineText = false //取消下划线
