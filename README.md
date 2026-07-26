@@ -2,6 +2,8 @@
 
 fake coolapk
 
+> 这个项目只是为了我自己使用，相比原版升级了依赖并新增一些东西，但是有很多 bug
+
 Token/LoginUtil from: [CoolbbsYou](https://github.com/WaitFme/CoolbbsYou)
 
 ## 声明
