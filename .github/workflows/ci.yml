@@ -8,8 +8,6 @@ on:
         description: 'SSH connection to Actions'
         required: false
         default: 'false'
-  watch:
-    types: [ started ]
   push:
     branches:
       - master
@@ -17,9 +15,7 @@ on:
     paths-ignore:
       - '**.md'
       - '**.txt'
-      - '.github/**'
       - '.idea/**'
-      - '!.github/workflows/**'
 
       # only one run
 concurrency:
@@ -43,8 +39,6 @@ jobs:
       - name: Gradle wrapper validation
         uses: gradle/wrapper-validation-action@main
 
-      - name: Set up gradle
-        uses: gradle/actions/setup-gradle@main
 
       - name: Set up JDK
         uses: actions/setup-java@main
@@ -56,17 +50,17 @@ jobs:
       - name: Set Gradle Conf
         run: |
           mkdir -p ~/.gradle/
-          echo 'org.gradle.parallel=true' >> ~/.gradle/gradle.properties
-
-          echo 'org.gradle.daemon=true' >> ~/.gradle/gradle.properties
-          echo 'org.gradle.jvmargs=-XX:+UseParallelGC -Xmx6g -Xms256m -XX:MaxMetaspaceSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 ' >> ~/.gradle/gradle.properties
-          echo 'org.gradle.workers.max=2' >> ~/.gradle/gradle.properties
-          echo 'kotlin.incremental=false' >> ~/.gradle/gradle.properties
-          echo 'kotlin.compiler.execution.strategy=in-process' >> ~/.gradle/gradle.properties
-          echo 'org.gradle.caching=true' >> ~/.gradle/gradle.properties
-          # 配置缓存
-          echo 'org.gradle.configuration-cache=true' >> ~/.gradle/gradle.properties
-          echo 'org.gradle.configuration-cache-problems=warn' >> ~/.gradle/gradle.properties
+          printf '%s\n' \
+            'org.gradle.parallel=true' \
+            'org.gradle.daemon=true' \
+            'org.gradle.jvmargs=-XX:+UseParallelGC -Xmx6g -Xms256m -XX:MaxMetaspaceSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8' \
+            'org.gradle.workers.max=2' \
+            'kotlin.incremental=false' \
+            'kotlin.compiler.execution.strategy=in-process' \
+            'org.gradle.caching=true' \
+            'org.gradle.configuration-cache=true' \
+            'org.gradle.configuration-cache-problems=warn' \
+            > ~/.gradle/gradle.properties
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
@@ -82,9 +76,9 @@ jobs:
 
       - name: Build with Gradle
         run: |
-          ./gradlew :app:assembleRelease -x lint -x lintVitalRelease \
-          --build-cache --parallel --no-daemon \
-          -x test -x checkReleaseAarMetadata \
+          ./gradlew :app:assembleRelease \
+          --build-cache --parallel \
+          -x checkReleaseAarMetadata \
           -x checkKotlinGradlePluginConfigurationErrors \
           -x checkReleaseDuplicateClasses
 #        env:
@@ -124,14 +118,14 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create or update beta tag
-        uses: richardsimko/update-tag@v1
+        uses: richardsimko/update-tag@main
         with:
           tag_name: beta
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish Pre-Release
-        uses: ncipollo/release-action@v1
+        uses: ncipollo/release-action@main
         with:
           name: "build_android_${{steps.current-time.outputs.formattedTime}}-${{ env.version_code }}-${{ env.version_number }}"
           tag: "beta"
@@ -140,9 +134,7 @@ jobs:
           artifacts: ./app/build/outputs/**/*.apk
 
       - name: Delete Workflow Runs
-        uses: Mattraks/delete-workflow-runs@v2
+        uses: Mattraks/delete-workflow-runs@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
-          retain_days: 0
-          keep_minimum_runs: 3
