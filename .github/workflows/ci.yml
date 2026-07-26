@@ -30,6 +30,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout
@@ -62,11 +64,9 @@ jobs:
           echo 'kotlin.incremental=false' >> ~/.gradle/gradle.properties
           echo 'kotlin.compiler.execution.strategy=in-process' >> ~/.gradle/gradle.properties
           echo 'org.gradle.caching=true' >> ~/.gradle/gradle.properties
-          echo 'org.gradle.configureondemand=true' >> ~/.gradle/gradle.properties
-
           # 配置缓存
-          echo 'org.gradle.unsafe.configuration-cache=true' >> ~/.gradle/gradle.properties
-          echo 'org.gradle.unsafe.configuration-cache-problems=warn' >> ~/.gradle/gradle.properties
+          echo 'org.gradle.configuration-cache=true' >> ~/.gradle/gradle.properties
+          echo 'org.gradle.configuration-cache-problems=warn' >> ~/.gradle/gradle.properties
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
