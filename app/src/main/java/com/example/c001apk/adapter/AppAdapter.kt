@@ -286,7 +286,7 @@ class AppAdapter(
                     binding.followBtn.setTextColor(
                         MaterialColors.getColor(
                             itemView.context,
-                            com.google.android.material.R.attr.colorPrimary,
+                            android.R.attr.colorPrimary,
                             0
                         )
                     )
@@ -586,7 +586,7 @@ class AppAdapter(
                             holder.binding.followBtn.setTextColor(
                                 MaterialColors.getColor(
                                     holder.itemView.context,
-                                    com.google.android.material.R.attr.colorPrimary,
+                                    android.R.attr.colorPrimary,
                                     0
                                 )
                             )

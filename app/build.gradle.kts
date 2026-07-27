@@ -63,12 +63,12 @@ val gitBuildName = providers.exec {
 
 android {
     namespace = "com.example.c001apk"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.c001apk"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 36
         versionCode = gitBuildNumber
         versionName = gitBuildName
 
@@ -181,6 +181,7 @@ dependencies {
     implementation(libs.rikkax.material)
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
+    implementation(libs.okhttp)
     implementation(libs.okhttp3.logging.interceptor)
     implementation(libs.glide)
     kapt(libs.glide.compiler)

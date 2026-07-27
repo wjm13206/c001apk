@@ -34,7 +34,7 @@ fun setExtraPic(imageView: ImageView, extraPic: String?) {
             setBackgroundColor(
                 MaterialColors.getColor(
                     imageView.context,
-                    com.google.android.material.R.attr.colorPrimary,
+                    android.R.attr.colorPrimary,
                     0
                 )
             )
@@ -64,7 +64,7 @@ fun setFollowText(textView: TextView, followAuthor: Int) {
                     textView.setTextColor(
                         MaterialColors.getColor(
                             textView.context,
-                            com.google.android.material.R.attr.colorPrimary,
+                            android.R.attr.colorPrimary,
                             0
                         )
                     )
@@ -204,7 +204,7 @@ fun setLike(textView: TextView, isLike: Int?) {
         val color = if (it == 1)
             MaterialColors.getColor(
                 textView.context,
-                com.google.android.material.R.attr.colorPrimary,
+                android.R.attr.colorPrimary,
                 0
             )
         else textView.context.getColor(android.R.color.darker_gray)

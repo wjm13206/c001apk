@@ -140,7 +140,7 @@ class FeedReplyAdapter(
                                 textView.highlightColor = ColorUtils.setAlphaComponent(
                                     MaterialColors.getColor(
                                         parent.context,
-                                        com.google.android.material.R.attr.colorPrimaryDark,
+                                        android.R.attr.colorPrimaryDark,
                                         0
                                     ), 128
                                 )

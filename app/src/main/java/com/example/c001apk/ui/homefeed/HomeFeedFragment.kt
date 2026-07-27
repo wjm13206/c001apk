@@ -144,7 +144,7 @@ class HomeFeedFragment : BaseAppFragment<HomeFeedViewModel>(), IOnTabClickListen
                 binding.captchaText.highlightColor = ColorUtils.setAlphaComponent(
                     MaterialColors.getColor(
                         requireContext(),
-                        com.google.android.material.R.attr.colorPrimaryDark,
+                        android.R.attr.colorPrimaryDark,
                         0
                     ), 128
                 )

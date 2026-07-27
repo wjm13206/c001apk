@@ -70,7 +70,7 @@ class ReplyBottomSheetDialog(mContext: Context, mView: View) : BottomSheetDialog
         editText.highlightColor = ColorUtils.setAlphaComponent(
             MaterialColors.getColor(
                 context,
-                com.google.android.material.R.attr.colorPrimaryDark,
+                android.R.attr.colorPrimaryDark,
                 0
             ), 128
         )
@@ -102,7 +102,7 @@ class ReplyBottomSheetDialog(mContext: Context, mView: View) : BottomSheetDialog
                 publish.setTextColor(
                     MaterialColors.getColor(
                         context,
-                        com.google.android.material.R.attr.colorPrimary,
+                        android.R.attr.colorPrimary,
                         0
                     )
                 )

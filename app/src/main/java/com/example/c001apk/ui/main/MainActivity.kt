@@ -131,7 +131,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), IOnBottomClickContaine
         badge.backgroundColor =
             MaterialColors.getColor(
                 this,
-                com.google.android.material.R.attr.colorPrimary,
+                android.R.attr.colorPrimary,
                 0
             )
         //badge.badgeTextColor = ContextCompat.getColor(this,R.color.design_default_color_error)

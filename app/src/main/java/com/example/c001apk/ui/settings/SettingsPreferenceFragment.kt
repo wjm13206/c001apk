@@ -176,7 +176,7 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat() {
             editText.highlightColor = ColorUtils.setAlphaComponent(
                 MaterialColors.getColor(
                     requireContext(),
-                    com.google.android.material.R.attr.colorPrimaryDark,
+                    android.R.attr.colorPrimaryDark,
                     0
                 ), 128
             )
