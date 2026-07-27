@@ -9,9 +9,11 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.PopupMenu
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.graphics.ColorUtils
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -36,6 +38,7 @@ import com.example.c001apk.logic.model.FeedEntity
 import com.example.c001apk.ui.base.BaseFragment
 import com.example.c001apk.ui.feed.reply.IOnPublishClickListener
 import com.example.c001apk.ui.feed.reply.Reply2ReplyBottomSheetDialog
+import com.example.c001apk.ui.feed.reply.ReplyActivity
 import com.example.c001apk.ui.feed.reply.ReplyBottomSheetDialog
 import com.example.c001apk.ui.feed.reply.ReplyRefreshListener
 import com.example.c001apk.ui.others.CopyActivity
@@ -75,6 +78,14 @@ class FeedFragment : BaseFragment<FragmentFeedBinding>(), IOnPublishClickListene
     private val alpha by lazy {
         ObjectAnimator.ofFloat(binding.titleProfile, "alpha", 0f, 1f).also {
             it.setDuration(500)
+        }
+    }
+    private val intentActivityResultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        if (it.resultCode == -1) {
+            viewModel.isRefreshing = true
+            refreshData()
         }
     }
 
@@ -408,7 +419,7 @@ class FeedFragment : BaseFragment<FragmentFeedBinding>(), IOnPublishClickListene
             title = viewModel.feedTypeName
             setNavigationIcon(R.drawable.ic_back)
             setNavigationOnClickListener {
-                requireActivity().finish()
+                activity?.finish()
             }
             setOnClickListener {
                 binding.recyclerView.stopScroll()

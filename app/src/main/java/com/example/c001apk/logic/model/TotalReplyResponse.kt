@@ -1,6 +1,8 @@
 package com.example.c001apk.logic.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class TotalReplyResponse(
     val status: Int?,
@@ -9,7 +11,9 @@ data class TotalReplyResponse(
     val data: List<Data>?
 ) {
 
+    @Parcelize
     data class Data(
+        var lastupdate: Long?,
         @SerializedName("extra_key") val extraKey: String?,
         val entityType: String?,
         val id: String,
@@ -27,10 +31,15 @@ data class TotalReplyResponse(
         val userAvatar: String,
         val replyRows: ArrayList<Data>?,
         val replyRowsMore: Int?,
-        val userAction: UserAction?
-    )
+        val userAction: UserAction?,
+        val userInfo: UserInfo
+    ) : Parcelable
 
-    data class UserAction(var like: Int)
+    @Parcelize
+    data class UserAction(var like: Int) : Parcelable
+
+    @Parcelize
+    data class UserInfo(val username: String) : Parcelable
 
 }
 
