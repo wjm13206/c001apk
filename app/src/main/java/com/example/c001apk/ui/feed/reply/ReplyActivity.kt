@@ -32,7 +32,6 @@ import com.example.c001apk.util.PrefManager
 import com.example.c001apk.util.makeToast
 import com.example.c001apk.view.SmoothInputLayout
 import com.google.android.material.color.MaterialColors
-import com.google.android.material.color.SurfaceColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -54,7 +53,9 @@ class ReplyActivity : BaseActivity<ActivityReplyBinding>(),
     private val imm by lazy {
         getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     }
-    private val color by lazy { SurfaceColors.SURFACE_1.getColor(this) }
+    private val color by lazy {
+        MaterialColors.getColor(this, com.google.android.material.R.attr.colorSurface, 0)
+    }
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -227,7 +228,11 @@ class ReplyActivity : BaseActivity<ActivityReplyBinding>(),
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        window.navigationBarColor = SurfaceColors.SURFACE_1.getColor(this)
+        window.navigationBarColor = MaterialColors.getColor(
+            this,
+            com.google.android.material.R.attr.colorSurface,
+            0
+        )
         window.decorView.setPadding(0, 0, 0, 0)
         val lp = window.attributes
         lp.width = WindowManager.LayoutParams.MATCH_PARENT
