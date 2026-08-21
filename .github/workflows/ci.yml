@@ -28,20 +28,21 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      actions: write
 
     steps:
       - name: Checkout
-        uses: actions/checkout@main
+        uses: actions/checkout@v5
         with:
           submodules: 'recursive'
           fetch-depth: 0
 
       - name: Gradle wrapper validation
-        uses: gradle/wrapper-validation-action@main
+        uses: gradle/actions/wrapper-validation@v5
 
 
       - name: Set up JDK
-        uses: actions/setup-java@main
+        uses: actions/setup-java@v5
         with:
           java-version: 17
           distribution: temurin
@@ -97,10 +98,8 @@ jobs:
 #          name: build_output_${{ github.event.head_commit.id }}.zip
 
       - name: 获取当前时间
-        uses: srfrnk/current-time@master
         id: current-time
-        with:
-          format: YYYY/MM/DD
+        run: echo "formattedTime=$(date -u +%Y/%m/%d)" >> "$GITHUB_OUTPUT"
 
 #      - name: 上传
 #        uses: "marvinpinto/action-automatic-releases@latest"
@@ -124,16 +123,16 @@ jobs:
           git push -f origin beta
 
       - name: Publish Pre-Release
-        uses: ncipollo/release-action@main
+        uses: ncipollo/release-action@v1.21.0
         with:
           name: "build_android_${{steps.current-time.outputs.formattedTime}}-${{ env.version_code }}-${{ env.version_number }}"
           tag: "beta"
           body: "beta ${{steps.current-time.outputs.formattedTime}}-${{ env.version_code }}-${{ env.version_number }}"
           prerelease: true
-          artifacts: ./app/build/outputs/**/*.apk
+          artifacts: app/build/outputs/**/*.apk
 
       - name: Delete Workflow Runs
-        uses: Mattraks/delete-workflow-runs@main
+        uses: Mattraks/delete-workflow-runs@v2.1.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
