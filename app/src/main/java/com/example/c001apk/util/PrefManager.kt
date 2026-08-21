@@ -16,6 +16,7 @@ object PrefManager {
     private const val UID = "uid"
     private const val NAME = "name"
     private const val TOKEN = "token"
+    private const val FIRST_LAUNCH_PASSWORD_VERIFIED = "first_launch_password_verified"
 
     private val pref = context.getSharedPreferences("settings", MODE_PRIVATE)
 
@@ -39,9 +40,15 @@ object PrefManager {
         get() = pref.getBoolean(SHOW_EMOJI, true)
         set(value) = pref.edit().putBoolean(SHOW_EMOJI, value).apply()
 
-    var isLogin: Boolean
+        var isLogin: Boolean
         get() = pref.getBoolean("isLogin", false)
         set(value) = pref.edit().putBoolean("isLogin", value).apply()
+
+    var isFirstLaunchPasswordVerified: Boolean
+        get() = pref.getBoolean(FIRST_LAUNCH_PASSWORD_VERIFIED, false)
+        set(value) = pref.edit().putBoolean(FIRST_LAUNCH_PASSWORD_VERIFIED, value).apply()
+
+
 
     var uid: String
         get() = pref.getString(UID, "")!!

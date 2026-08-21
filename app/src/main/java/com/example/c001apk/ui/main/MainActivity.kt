@@ -1,6 +1,11 @@
 package com.example.c001apk.ui.main
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.text.InputType
+import android.view.ViewGroup
+import android.view.WindowManager
+
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -13,6 +18,9 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.c001apk.R
 import com.example.c001apk.databinding.ActivityMainBinding
 import com.example.c001apk.ui.base.BaseActivity
+import com.example.c001apk.util.FirstLaunchPassword
+import com.example.c001apk.util.PrefManager
+
 import com.example.c001apk.ui.home.HomeFragment
 import com.example.c001apk.ui.message.MessageFragment
 import com.example.c001apk.ui.settings.SettingsFragment
@@ -39,13 +47,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), IOnBottomClickContaine
 
         onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
 
-        if (viewModel.isInit) {
-            viewModel.isInit = false
-            genData()
-            initObserve()
-        } else if (viewModel.badge != 0) {
-            setBadge()
+                if (PrefManager.isFirstLaunchPasswordVerified) {
+            initializeMainData()
+        } else {
+            showFirstLaunchPasswordDialog()
         }
+
+
 
         binding.viewPager.apply {
             offscreenPageLimit = 2
@@ -111,7 +119,68 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), IOnBottomClickContaine
 
     }
 
+        private fun initializeMainData() {
+        if (viewModel.isInit) {
+            viewModel.isInit = false
+            genData()
+            initObserve()
+        } else if (viewModel.badge != 0) {
+            setBadge()
+        }
+    }
+
+    private fun showFirstLaunchPasswordDialog() {
+        val passwordInput = com.google.android.material.textfield.TextInputEditText(this).apply {
+            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+        }
+        val passwordLayout = com.google.android.material.textfield.TextInputLayout(this).apply {
+            hint = "密码"
+            endIconMode = com.google.android.material.textfield.TextInputLayout.END_ICON_PASSWORD_TOGGLE
+            addView(passwordInput)
+        }
+
+        val dialog = com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+            .setTitle("首次进入验证")
+            .setMessage("请输入密码后继续使用")
+            .setView(passwordLayout)
+            .setCancelable(false)
+            .setNegativeButton("退出") { _, _ -> finish() }
+            .setPositiveButton("确认", null)
+            .create()
+
+        dialog.setOnShowListener {
+            passwordInput.requestFocus()
+            dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+                val input = passwordInput.text?.toString().orEmpty()
+                if (FirstLaunchPassword.verify(this, input)) {
+                    PrefManager.isFirstLaunchPasswordVerified = true
+                    dialog.dismiss()
+                    initializeMainData()
+                    showProjectNotice()
+                } else {
+                    passwordLayout.error = "密码错误，请重试"
+                    passwordInput.selectAll()
+                }
+            }
+        }
+        dialog.show()
+    }
+
+    private fun showProjectNotice() {
+        com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+            .setTitle("项目提示")
+            .setMessage("此项目 bug 较多，请自行删除密码逻辑后编译，或者在源代码里查找密码。")
+            .setPositiveButton("知道了", null)
+            .show()
+    }
+
     private fun initObserve() {
+
         viewModel.setBadge.observe(this) { event ->
             event.getContentIfNotHandledOrReturnNull()?.let {
                 if (it)
