@@ -8,15 +8,7 @@ on:
         description: 'SSH connection to Actions'
         required: false
         default: 'false'
-  push:
-    branches:
-      - master
-      - main
-    paths-ignore:
-      - '**.md'
-      - '**.txt'
-      - '.idea/**'
-
+        
       # only one run
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
