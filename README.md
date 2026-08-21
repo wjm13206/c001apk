@@ -2,7 +2,7 @@
 
 fake coolapk
 
-> 这个项目只是为了我自己使用，相比原版升级了依赖并新增一些东西，但是有很多 bug
+> 这个项目只是为了我自己使用，有很多问题暂不提供
 
 Token/LoginUtil from: [CoolbbsYou](https://github.com/WaitFme/CoolbbsYou)
 

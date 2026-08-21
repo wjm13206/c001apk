@@ -78,6 +78,7 @@ jobs:
         run: |
           ./gradlew :app:assembleRelease \
           --build-cache --parallel \
+          -Pandroid.injected.build.abi=arm64-v8a \
           -x checkReleaseAarMetadata \
           -x checkKotlinGradlePluginConfigurationErrors \
           -x checkReleaseDuplicateClasses
