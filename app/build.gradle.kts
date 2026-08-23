@@ -188,7 +188,10 @@ dependencies {
     implementation(libs.glide.okhttp3.integration)
     implementation(libs.glide.transformations)
     implementation("com.github.tulip799837434.mojito:mojito:1.0.5")
-    implementation("com.github.tulip799837434.mojito:SketchImageViewLoader:1.0.5")
+    implementation("com.github.tulip799837434.mojito:SketchImageViewLoader:1.0.5") {
+    exclude("me.panpf:sketch-gif")
+}
+implementation("io.github.panpf.sketch:sketch-gif:2.7.1")
     implementation("com.github.tulip799837434.mojito:GlideImageLoader:1.0.5")
     implementation(libs.drakeet.about)
     implementation(libs.jbcrypt)
