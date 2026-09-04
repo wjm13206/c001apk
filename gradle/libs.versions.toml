@@ -29,7 +29,7 @@ retrofit = "3.0.0"
 room = "2.8.4"
 swiperefreshlayout = "1.2.0"
 utils = "1.1.5.4"
-webkit = "1.16.0"
+webkit = "1.17.0"
 
 [libraries]
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
